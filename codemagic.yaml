@@ -5,7 +5,6 @@ workflows:
 
     environment:
       java: 17
-      android_signing: false
 
     cache:
       cache_paths:
@@ -14,16 +13,13 @@ workflows:
 
     scripts:
       - name: Fix Gradle permissions
-        script: |
-          chmod +x gradlew
+        script: chmod +x gradlew
 
       - name: Clean project
-        script: |
-          ./gradlew clean
+        script: ./gradlew clean
 
       - name: Build Debug APK
-        script: |
-          ./gradlew assembleDebug --stacktrace
+        script: ./gradlew assembleDebug --stacktrace
 
     artifacts:
       - app/build/outputs/**/*.apk
