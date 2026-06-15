@@ -1,6 +1,6 @@
 workflows:
-  nexmusic_x_build:
-    name: NexMusic X CI Build
+  nexmusic_x:
+    name: NexMusic X Build
     max_build_duration: 60
 
     environment:
@@ -12,10 +12,10 @@ workflows:
         - ~/.gradle/wrapper
 
     scripts:
-      - name: Fix Gradle permissions
+      - name: Fix permissions
         script: chmod +x gradlew
 
-      - name: Clean project
+      - name: Clean
         script: ./gradlew clean
 
       - name: Build Debug APK
@@ -23,8 +23,3 @@ workflows:
 
     artifacts:
       - app/build/outputs/**/*.apk
-
-    publishing:
-      email:
-        recipients:
-          - prince.ar.abdur.rahman2008@gmail.com
