@@ -1,0 +1,8 @@
+{
+  "name": "NexMusic X",
+  "description": "Ultimate Offline Music Player with Spotify UI, Poweramp Audio FX, and Musicolet Offline capacity",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
