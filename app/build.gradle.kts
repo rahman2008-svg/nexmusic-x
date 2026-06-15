@@ -16,25 +16,7 @@ android {
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    signingConfigs {
-        getByName("debug") {
-            storeFile = file("${rootDir}/debug.keystore")
-            storePassword = "android"
-            keyAlias = "androiddebugkey"
-            keyPassword = "android"
-        }
-
-        create("release") {
-            val keystorePath = System.getenv("KEYSTORE_PATH") ?: "${rootDir}/my-upload-key.jks"
-            storeFile = file(keystorePath)
-            storePassword = System.getenv("STORE_PASSWORD")
-            keyAlias = "upload"
-            keyPassword = System.getenv("KEY_PASSWORD")
-        }
     }
 
     buildTypes {
@@ -45,11 +27,10 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            signingConfig = signingConfigs.getByName("release")
         }
 
         debug {
-            signingConfig = signingConfigs.getByName("debug")
+            isMinifyEnabled = false
         }
     }
 
@@ -58,9 +39,9 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    // ✅ FIX: Kotlin modern toolchain (NO kotlinOptions)
-    kotlin {
-        jvmToolchain(17)
+    // ✅ SAFE FOR ALL CI (Codemagic + GitHub Actions)
+    kotlinOptions {
+        jvmTarget = "17"
     }
 
     buildFeatures {
